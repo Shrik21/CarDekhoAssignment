@@ -4,12 +4,20 @@ Production-ready MVP for the CarDekho AI-Native take-home assignment.
 
 AI Car Advisor helps confused car buyers shortlist cars from a seeded database based on budget, fuel preference, usage pattern, passenger count, and priority.
 
+## What I Built And Why
+
+I built a focused recommendation flow for buyers who know their needs but do not know which cars to shortlist. The user enters budget, fuel preference, usage type, passenger count, and priority. The backend ranks cars with an explainable score and returns the top 5 with buyer-friendly reasons.
+
+I chose this scope because it directly addresses the brief: moving a confused buyer from "too many options" to a confident shortlist. I prioritized an end-to-end working product over a larger but unfinished feature set.
+
 ## Tech Stack
 
 - Frontend: React, TypeScript, Vite, Tailwind CSS
 - Backend: Java 21, Spring Boot 3, Spring Web, Spring Data JPA
 - Database: PostgreSQL
 - Infra: Docker Compose
+
+I picked React + TypeScript for a quick, reliable interactive UI and Spring Boot + JPA because the assignment asks for a real backend with persistence and non-trivial computation. PostgreSQL keeps the database path production-like while Docker Compose and env vars make local/cloud setup simple.
 
 ## Run With Docker
 
@@ -206,4 +214,29 @@ cd frontend && npm run build
 
 ## MVP Scope
 
-The app prioritizes working features over complex personalization. In a next iteration, the recommendation engine could add user location, ownership cost, service network, real inventory, and an LLM-generated explanation layer.
+The app prioritizes working features over complex personalization.
+
+Deliberately cut from this 2-3 hour MVP:
+
+- Real inventory integrations
+- User login and saved shortlists
+- Advanced LLM-based reasoning
+- Ownership cost, service network, and resale value
+- Admin tooling for managing car data
+
+## AI Tool Usage
+
+I used AI assistance for fast scaffolding, implementation planning, UI iteration, Docker/deployment setup, and debugging. The most useful parts were generating the Spring Boot/React structure quickly, reviewing API boundaries, and catching deployment issues like CORS and Render port configuration.
+
+I manually reviewed the generated code, ran tests/builds, verified API responses, fixed JPA lazy-loading behavior, and made product scoping decisions. The tool got in the way around environment-specific issues such as local PostgreSQL credentials and deployment secrets, which required manual judgment and safe handling.
+
+## If I Had Another 4 Hours
+
+I would add:
+
+- A richer dataset with ownership cost and body type
+- Better recommendation explanations with pros/cons per car
+- Filters for transmission, body style, and brand preference
+- A persistent comparison shortlist
+- Basic analytics for popular buyer intents
+- More API tests around scoring edge cases
