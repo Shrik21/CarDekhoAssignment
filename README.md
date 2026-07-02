@@ -23,6 +23,89 @@ docker compose up --build
 
 The backend seeds sample cars on first startup.
 
+## Free Deployment
+
+Recommended free MVP setup:
+
+- Database: Neon Postgres free tier
+- Backend: Render free web service
+- Frontend: Vercel Hobby
+
+### 1. Push Code To GitHub
+
+This repo is ready to deploy from GitHub. Push the latest commits:
+
+```bash
+git push origin main
+```
+
+### 2. Create Neon Postgres
+
+1. Go to https://neon.com and create a free project.
+2. Copy the connection details.
+3. Use this JDBC format for the backend:
+
+```text
+jdbc:postgresql://HOST/DATABASE?sslmode=require
+```
+
+Set these values later on Render:
+
+```text
+SPRING_DATASOURCE_URL=jdbc:postgresql://HOST/DATABASE?sslmode=require
+SPRING_DATASOURCE_USERNAME=USER
+SPRING_DATASOURCE_PASSWORD=PASSWORD
+```
+
+### 3. Deploy Backend On Render
+
+1. Go to https://render.com.
+2. Create a new Web Service from this GitHub repo.
+3. Select the `ai-car-advisor-api` Blueprint if Render detects `render.yaml`, or use:
+   - Runtime: Docker
+   - Docker context: `./backend`
+   - Dockerfile path: `./backend/Dockerfile`
+4. Add environment variables:
+
+```text
+SPRING_DATASOURCE_URL=jdbc:postgresql://HOST/DATABASE?sslmode=require
+SPRING_DATASOURCE_USERNAME=USER
+SPRING_DATASOURCE_PASSWORD=PASSWORD
+CORS_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+```
+
+After deploy, test:
+
+```text
+https://your-render-service.onrender.com/api/cars
+```
+
+### 4. Deploy Frontend On Vercel
+
+1. Go to https://vercel.com.
+2. Import this GitHub repo.
+3. Set Root Directory to `frontend`.
+4. Set build settings:
+   - Build command: `npm run build`
+   - Output directory: `dist`
+5. Add environment variable:
+
+```text
+VITE_API_BASE_URL=https://your-render-service.onrender.com
+```
+
+Redeploy the frontend after setting the backend URL.
+
+### 5. Update CORS
+
+After Vercel gives the final frontend URL, update Render:
+
+```text
+CORS_ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+```
+
+Then redeploy the backend.
+
 ## Run Locally
 
 Start PostgreSQL first:
