@@ -4,6 +4,12 @@ Production-ready MVP for the CarDekho AI-Native take-home assignment.
 
 AI Car Advisor helps confused car buyers shortlist cars from a seeded database based on budget, fuel preference, usage pattern, passenger count, and priority.
 
+## Live URLs
+
+- Frontend: https://car-dekho-assignment-rho.vercel.app
+- Backend: https://ai-car-advisor-api.onrender.com
+- Cars API: https://ai-car-advisor-api.onrender.com/api/cars
+
 ## What I Built And Why
 
 I built a focused recommendation flow for buyers who know their needs but do not know which cars to shortlist. The user enters budget, fuel preference, usage type, passenger count, and priority. The backend ranks cars with an explainable score and returns the top 5 with buyer-friendly reasons.
